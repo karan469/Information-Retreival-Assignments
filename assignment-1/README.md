@@ -1,4 +1,6 @@
-Process:
+# Assignment-1
+
+## Process:
     - Create folders and subfolders ./text/TaggedTrainingAP/ in root dir
     - preprocess.py: Just for preprocessing any line of text.
     - run grab_text.sh (creates only text out of files)
@@ -9,11 +11,11 @@ Process:
     - query_search.py: 
         - Input: posting_list.json, data.csv(containing only texts field of all files in all docs)
         - Output: tfidf of most relevant doc
-Things to remember:
+## Things to remember:
     - <TEXT></TEXT> might be empty. No need to index those files.
     - Merge sequence of same tags such as <NAME>.
     - Queries file: topics.51-100. Contains 50 individual topics. Choose text from only <title> tag.
-To-Do:
+## To-Do:
     - Create virtual environment at last.
     - Remove stopwords, do lemmetization
     - Do encoding and compress the processes data set time execution
