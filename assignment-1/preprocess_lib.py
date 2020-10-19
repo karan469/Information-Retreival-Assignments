@@ -11,8 +11,10 @@ class PreProcess(object):
 		for i in stoplist:
 			self.punctuations[i]=1
 
-	def run_on(self, line):
-		temp = line.split(' ')
+	def run_on(self, line, return_tokens=False, case_senstivity=False):
+		tramp = line.split('-')
+		tramp = ' '.join(tramp)
+		temp = tramp.split(' ')
 
 		# merge continues same tags and convert to lower
 		res = []
@@ -30,13 +32,17 @@ class PreProcess(object):
 			if(flag==1):
 				flag=-1
 			else:
-				res.append(temp[index].lower())
-		
+				if(case_senstivity==False):
+					res.append(temp[index].lower())
+				else:
+					res.append(temp[index])
+
 		# Joins the full name, organization or location to:
 		# loc_new_york, org_abc_news, person_donald_trump
 		res_1 = []
 		index_1 = 0
-		while(index_1<len(res)-2):
+		while(index_1<len(res)):
+			# Assuming tagging is not done wrongly for ex no <person> tag at the end of line
 			if('<person>' in res[index_1]):
 				index_2 = index_1
 				while('</person>' not in res[index_2] and index_2<len(res)-1):
@@ -68,6 +74,8 @@ class PreProcess(object):
 			if(i not in self.punctuations and i not in self.stop_words):
 				res_1.append(i)
 
+		if(return_tokens):
+			return res_1
 		# Removing all punctuations now
 		return ' '.join(res_1)
 

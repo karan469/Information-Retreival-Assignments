@@ -11,6 +11,8 @@ class Tfidf(object):
 		
 		with open(self.posting_list_path) as json_file: 
 			self.data = json.load(json_file)
+
+		print('json loaded')
 		
 		df = pd.read_csv(data_path)
 		self.num_files = len(df)
